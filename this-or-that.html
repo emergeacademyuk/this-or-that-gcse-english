@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>This or That: Mario & Sonic</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f6ff;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 {
+      color: #2c2c54;
+    }
+    .question {
+      font-size: 1.5rem;
+      margin: 30px 0;
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 20px;
+    }
+    button {
+      font-size: 1.2rem;
+      padding: 20px 30px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      background: #ffd32a;
+    }
+    button:hover {
+      background: #ffb142;
+    }
+    .feedback {
+      margin-top: 30px;
+      font-size: 1.2rem;
+      color: #40407a;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎮 This or That: Mario & Sonic</h1>
+  <p><strong>Mission:</strong> Choose one and explain why</p>
+
+  <div class="question" id="question"></div>
+
+  <div class="buttons">
+    <button onclick="choose(0)" id="btn1"></button>
+    <button onclick="choose(1)" id="btn2"></button>
+  </div>
+
+  <div class="feedback" id="feedback"></div>
+
+  <script>
+    const questions = [
+      ["Mario Kart", "Sonic"],
+      ["Fast speed", "Tricky obstacles"],
+      ["Bright colourful worlds", "Dark moody worlds"],
+      ["Last‑second win", "Easy win"],
+      ["Calm race", "Chaotic race"],
+      ["Serious hero", "Funny hero"]
+    ];
+
+    let current = 0;
+
+    function loadQuestion() {
+      document.getElementById("question").innerText =
+        "Which do you prefer?";
+      document.getElementById("btn1").innerText = questions[current][0];
+      document.getElementById("btn2").innerText = questions[current][1];
+      document.getElementById("feedback").innerText = "";
+    }
+
+    function choose(choice) {
+      document.getElementById("feedback").innerText =
+        "Great choice! Why do you think that makes the game more exciting?";
+      current = (current + 1) % questions.length;
+      setTimeout(loadQuestion, 1500);
+    }
+
+    loadQuestion();
+  </script>
+
+</body>
+</html>
