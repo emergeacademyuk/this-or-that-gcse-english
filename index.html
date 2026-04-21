@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>This or That - Mario & Sonic</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(#eaf0ff, #ffffff);
+    margin: 0;
+    padding: 30px;
+    text-align: center;
+  }
+
+  h1 {
+    color: #1e3799;
+    margin-bottom: 10px;
+  }
+
+  .mission {
+    background: #4a69bd;
+    color: white;
+    padding: 12px;
+    border-radius: 12px;
+    max-width: 750px;
+    margin: 15px auto 30px;
+    font-weight: bold;
+  }
+
+  .game-box {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 800px;
+    margin: auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+  }
+
+  .progress {
+    color: #576574;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+  }
+
+  .question {
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+    color: #222f3e;
+  }
+
+  .choices {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  button.choice {
+    font-size: 1.25rem;
+    padding: 20px 34px;
+    border-radius: 18px;
+    border: none;
+    cursor: pointer;
+    background: #feca57;
+    min-width: 220px;
+  }
+
+  button.choice:hover {
+    background: #ff9f43;
+  }
+
+  .feedback {
+    margin-top: 30px;
+    color: #2c2c54;
+    font-size: 1.25rem;
+  }
+
+  .next {
+    margin-top: 30px;
+    padding: 14px 34px;
+    background: #1e3799;
+    color: white;
+    border-radius: 16px;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: none;
+  }
+
+  .next:hover {
+    background: #273c75;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>This or That: Mario & Sonic</h1>
+
+<div class="mission">
+  Today’s Mission: Explore two game worlds, explain your choices, and level up GCSE English skills
+</div>
+
+<div class="game-box">
+
+  <div class="progress" id="progress">Loading...</div>
+
+  <div class="question" id="question">Get ready!</div>
+
+  <div class="choices">
+    <button class="choice" id="btn1">Option A</button>
+    <button class="choice" id="btn2">Option B</button>
+  </div>
+
+  <div class="feedback" id="feedback"></div>
+
+  <button class="next" id="nextBtn">Next</button>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const questions = [
+
+    { options: ["Mario Kart", "Sonic"], prompt: "Which world feels more exciting and why?" },
+    { options: ["Bright colourful worlds", "Dark moody worlds"], prompt: "Which creates a stronger atmosphere for the player?" },
+    { options: ["Simple tracks", "Detailed tracks"], prompt: "Which keeps your attention more and why?" },
+
+    { options: ["Fast speed", "Careful control"], prompt: "How does this choice affect how the player feels?" },
+    { options: ["Sudden boosts", "Gradual speed-up"], prompt: "Which creates more excitement or tension?" },
+    { options: ["Straight paths", "Twisty paths"], prompt: "Which makes the game more challenging?" },
+
+    { options: ["Chaotic races", "Calm races"], prompt: "Which feels more intense and why?" },
+    { options: ["Surprises", "Predictable moments"], prompt: "Which keeps the player more interested?" },
+    { options: ["Last second win", "Winning easily"], prompt: "Which feels more satisfying for the player?" },
+
+    { options: ["Mario", "Sonic"], prompt: "Which character feels more confident?" },
+    { options: ["Serious hero", "Funny hero"], prompt: "Which type of character is more engaging?" },
+    { options: ["Strong characters", "Fast characters"], prompt: "Which feels more powerful in the game?" },
+
+    { options: ["Mario Kart worlds", "Sonic worlds"], prompt: "Which is more enjoyable overall and why?" },
+    { options: ["Speed focused games", "Skill focused games"], prompt: "Which do you prefer and why?" },
+    { options: ["Simple fun", "Big challenges"], prompt: "Which makes a better game experience?" }
+
+  ];
+
+  let current = 0;
+
+  const progress = document.getElementById("progress");
+  const question = document.getElementById("question");
+  const btn1 = document.getElementById("btn1");
+  const btn2 = document.getElementById("btn2");
+  const feedback = document.getElementById("feedback");
+  const nextBtn = document.getElementById("nextBtn");
+
+  function loadQuestion() {
+    progress.textContent = "Question " + (current + 1) + " of " + questions.length;
+    question.textContent = "Which do you prefer?";
+    btn1.textContent = questions[current].options[0];
+    btn2.textContent = questions[current].options[1];
+    feedback.textContent = "";
+    nextBtn.style.display = "none";
+  }
+
+  btn1.onclick = function () { choose(0); };
+  btn2.onclick = function () { choose(1); };
+
+  function choose(choice) {
+    feedback.textContent = questions[current].prompt;
+    nextBtn.style.display = "inline-block";
+  }
+
+  nextBtn.onclick = function () {
+    current++;
+    if (current < questions.length) {
+      loadQuestion();
+    } else {
+      endGame();
+    }
+  };
+
+  function endGame() {
+    progress.textContent = "Mission complete";
+    question.textContent = "Checkpoint reached!";
+    feedback.textContent =
+      "You have explained preferences and effects. This links directly to AQA English Language Paper 1, Questions 2 and 4.";
+    btn1.style.display = "none";
+    btn2.style.display = "none";
+    nextBtn.style.display = "none";
+  }
+
+  loadQuestion();
+});
+</script>
+
+</body>
+</html>
